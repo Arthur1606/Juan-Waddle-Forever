@@ -409,6 +409,18 @@ handler.xt(Handle.AdoptPuffle, (client, puffleType, puffleName) => {
   if (!client.isEngine2 && !client.isEngine1) {
     return;
   }
+
+  // Validate puffle type exists in catalog
+  if (!PUFFLES.has(puffleType)) {
+    return;
+  }
+
+  // Sanitize name: strip pipe separators and cap length
+  puffleName = puffleName.replace(/\|/g, '').substring(0, 12);
+  if (puffleName.length === 0) {
+    return;
+  }
+
   let cost = 800;
 
   if (puffleType == 9 && findInVersion(client.version, BROWN_PUFFLE_TIMELINE)) { // free brown puffle
@@ -416,10 +428,15 @@ handler.xt(Handle.AdoptPuffle, (client, puffleType, puffleName) => {
   }
 
   if (client.penguin.coins < cost) {
-    // TODO no coins error
-  } else if (false) {
-    // TODO too many puffles error
+    client.sendError(401);
+    return;
   }
+
+  if (client.penguin.getPuffles().length >= 16) {
+    client.sendError(440);
+    return;
+  }
+
   client.penguin.removeCoins(cost)
   const puffle = client.penguin.addPuffle(puffleName, puffleType);
   client.sendXt('pn', client.penguin.coins, getPuffleString(puffle));
@@ -427,13 +444,26 @@ handler.xt(Handle.AdoptPuffle, (client, puffleType, puffleName) => {
 
   client.addPostcard(111, { details: puffleName });
   client.update();
-  // TODO favorite item code in houdini?
+}, {
+  cooldown: 2000
 })
 
 handler.xt(Handle.AdoptPuffleOld, (client, puffleType, puffleName) => {
   if (!client.isEngine1) {
     return;
   }
+
+  // Validate puffle type exists in catalog
+  if (!PUFFLES.has(puffleType)) {
+    return;
+  }
+
+  // Sanitize name: strip pipe separators and cap length
+  puffleName = puffleName.replace(/\|/g, '').substring(0, 12);
+  if (puffleName.length === 0) {
+    return;
+  }
+
   let cost = 800;
 
   if (puffleType == 9 && findInVersion(client.version, BROWN_PUFFLE_TIMELINE)) { // free brown puffle
@@ -441,10 +471,15 @@ handler.xt(Handle.AdoptPuffleOld, (client, puffleType, puffleName) => {
   }
 
   if (client.penguin.coins < cost) {
-    // TODO no coins error
-  } else if (false) {
-    // TODO too many puffles error
+    client.sendError(401);
+    return;
   }
+
+  if (client.penguin.getPuffles().length >= 16) {
+    client.sendError(440);
+    return;
+  }
+
   client.penguin.removeCoins(cost)
   const puffle = client.penguin.addPuffle(puffleName, puffleType);
   // Engine 1 response: subaction 'n' (adoption completed), followed by the 13-element puffle string
@@ -453,6 +488,8 @@ handler.xt(Handle.AdoptPuffleOld, (client, puffleType, puffleName) => {
   client.sendEngine1Coins();
 
   client.update();
+}, {
+  cooldown: 2000
 })
 
 // seemingly the format in which client usually wants the puffle IDs
