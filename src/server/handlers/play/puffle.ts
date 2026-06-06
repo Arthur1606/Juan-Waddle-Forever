@@ -452,7 +452,6 @@ handler.xt(Handle.AdoptPuffleOld, (client, puffleType, puffleName) => {
   client.sendXt('p', 'n', puffleStr);
   client.sendEngine1Coins();
 
-  client.addPostcard(111, { details: puffleName });
   client.update();
 })
 

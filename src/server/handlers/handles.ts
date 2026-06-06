@@ -543,6 +543,7 @@ const HANDLER_MAPPING: HandlerMapping = {
     'p': {
       'pn': [Handle.AdoptPuffle, Handle.AdoptPuffleNew],
       'pg': Handle.GetIglooPuffles,
+      'g': Handle.GetIglooPuffles,
       'pw': Handle.WalkPuffle,
       'checkpufflename': Handle.CheckPuffleName,
       'pcn': Handle.CheckPuffleNameAlt,
