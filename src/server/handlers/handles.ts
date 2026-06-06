@@ -654,7 +654,8 @@ const HANDLER_MAPPING: HandlerMapping = {
     'um': Handle.UpdateIglooMusic2007
   },
   'p': {
-    'gp': Handle.GetPlayerOldAlt
+    'gp': Handle.GetPlayerOldAlt,
+    'n': Handle.AdoptPuffle
   }
 }
 

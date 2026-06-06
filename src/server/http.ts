@@ -71,6 +71,7 @@ export class HttpServer {
       if (special === undefined || specialCheck === undefined) {
         const info = routesTimeline.get(route);
         if (info === undefined) {
+          console.log(`[404] Requested unmapped route: ${route}`);
           next();
         } else {
           const filePath = findInVersion(this.settingsManager.settings.version, info);
