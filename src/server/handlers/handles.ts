@@ -131,6 +131,7 @@ export enum Handle {
   LeaveWaddle,
   DonateCoins,
   AdoptPuffle,
+  AdoptPuffleOld,
   AdoptPuffleNew,
   GetIglooPuffles,
   WalkPuffle,
@@ -328,6 +329,7 @@ export const HANDLE_ARGUMENTS = {
   [Handle.LeaveWaddle]: [],
   [Handle.DonateCoins]: ['string', 'number'],
   [Handle.AdoptPuffle]: ['number', 'string'],
+  [Handle.AdoptPuffleOld]: ['number', 'string'],
   [Handle.AdoptPuffleNew]: ['number', 'string', 'number'],
   [Handle.GetIglooPuffles]: ['number', 'string'],
   [Handle.WalkPuffle]: ['number', 'number'],
@@ -655,7 +657,7 @@ const HANDLER_MAPPING: HandlerMapping = {
   },
   'p': {
     'gp': Handle.GetPlayerOldAlt,
-    'n': Handle.AdoptPuffle
+    'n': Handle.AdoptPuffleOld
   }
 }
 
