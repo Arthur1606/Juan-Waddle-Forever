@@ -212,7 +212,8 @@ export enum Handle {
   MoveHockeyPuck,
   MoveHockeyPuckOld,
   UpdateHockeyGame,
-  BuyPowerCards
+  BuyPowerCards,
+  CheckPuffleNameOld
 };
 
 /** Map of all the handles and their valid arguments */
@@ -408,7 +409,8 @@ export const HANDLE_ARGUMENTS = {
   [Handle.MoveHockeyPuck]: ['number', 'number', 'number', 'number', 'number'],
   [Handle.MoveHockeyPuckOld]: ['number', 'number'],
   [Handle.UpdateHockeyGame]: ['number'],
-  [Handle.BuyPowerCards]: []
+  [Handle.BuyPowerCards]: [],
+  [Handle.CheckPuffleNameOld]: ['string']
 } as const;
 
 const HANDLER_MAPPING: HandlerMapping = {
@@ -636,7 +638,8 @@ const HANDLER_MAPPING: HandlerMapping = {
   'm': {
     'sm': Handle.SendMessageOld,
     'ss': Handle.SendSafeMessageOldAlt,
-    'checkName': Handle.CheckNameOld
+    'checkName': Handle.CheckNameOld,
+    'cw': Handle.CheckPuffleNameOld
   },
   'r': {
     'or': Handle.OpenIglooOld,

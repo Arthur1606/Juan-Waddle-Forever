@@ -616,6 +616,11 @@ handler.xt(Handle.CheckPuffleName, (client, puffleName) => {
   client.sendXt('checkpufflename', puffleName, 1);
 })
 
+// Engine 1 puffle name check
+handler.xt(Handle.CheckPuffleNameOld, (client, puffleName) => {
+  client.sendXt('cw', puffleName, 1);
+})
+
 // endpoint that checks name used by some puffles (rainbow puffle, gold puffle)
 // potentially a predecessor to the one above
 handler.xt(Handle.CheckPuffleNameAlt, (client, puffleName) => {
