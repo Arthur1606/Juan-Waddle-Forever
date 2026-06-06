@@ -406,7 +406,7 @@ const getPuffleString = (puffle: PlayerPuffle): string => {
 }
 
 handler.xt(Handle.AdoptPuffle, (client, puffleType, puffleName) => {
-  if (!client.isEngine2) {
+  if (!client.isEngine2 && !client.isEngine1) {
     return;
   }
   let cost = 800;
@@ -525,7 +525,7 @@ handler.xt(Handle.AdoptPuffleNew, (client, puffleType, puffleName, puffleSubType
 
 // get puffles in igloo
 handler.xt(Handle.GetIglooPuffles, (client, id, iglooType) => {
-  if (client.isEngine2) {
+  if (client.isEngine2 || client.isEngine1) {
     const puffles = client.penguin.getPuffles().map((puffle) => {
       return [
         puffle.id,
@@ -576,7 +576,7 @@ handler.xt(Handle.GetIglooPuffles, (client, id, iglooType) => {
 
 // walking puffle engine 2
 handler.xt(Handle.WalkPuffle, (client, puffleId, walking) => {
-  if (!client.isEngine2) {
+  if (!client.isEngine2 && !client.isEngine1) {
     return;
   }
   // TODO add puffle refusing to walk
