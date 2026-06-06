@@ -447,8 +447,8 @@ handler.xt(Handle.AdoptPuffleOld, (client, puffleType, puffleName) => {
   }
   client.penguin.removeCoins(cost)
   const puffle = client.penguin.addPuffle(puffleName, puffleType);
-  // Engine 1 response: subaction 'n' (adoption completed), followed by the puffle string
-  const puffleStr = [puffle.id, puffle.name, puffle.type, 100, 100, 100, 100, 100, 100, 0].join('|');
+  // Engine 1 response: subaction 'n' (adoption completed), followed by the 13-element puffle string
+  const puffleStr = [puffle.id, puffle.name, puffle.type, 100, 100, 100, 100, 100, 100, 0, 0, 0, 0].join('|');
   client.sendXt('p', 'n', puffleStr);
   client.sendEngine1Coins();
 
@@ -575,7 +575,11 @@ handler.xt(Handle.GetIglooPuffles, (client, id, iglooType) => {
       client.giveStamp(21);
     }
   
-    client.sendXt('pg', ...puffles);
+    if (client.isEngine1) {
+      client.sendXt('p', 'g', ...puffles);
+    } else {
+      client.sendXt('pg', ...puffles);
+    }
   } else if (client.isEngine3) {
     const isBackyard = iglooType === 'backyard';
     const puffles = client.penguin.getPuffles().filter((puffle) => {
