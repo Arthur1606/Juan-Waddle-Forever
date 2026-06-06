@@ -603,6 +603,37 @@ handler.xt(Handle.GetIglooPuffles, (client, id, iglooType) => {
   }
 })
 
+// get puffles in igloo for Engine 1 (extension 'p', code 'g')
+handler.xt(Handle.GetIglooPufflesOld, (client, id) => {
+  if (!client.isEngine1) {
+    return;
+  }
+  const puffles = client.penguin.getPuffles().map((puffle) => {
+    return [
+      puffle.id,
+      puffle.name,
+      puffle.type,
+      puffle.clean,
+      puffle.food,
+      puffle.rest,
+      100,
+      100,
+      100,
+      0,
+      0,
+      0,
+      puffle.id === client.walkingPuffle ? 1 : 0
+    ].join('|')
+  })
+
+  if (puffles.length >= 16) {
+    // PUFFLE OWNER
+    client.giveStamp(21);
+  }
+
+  client.sendXt('p', 'g', ...puffles);
+})
+
 // walking puffle engine 2
 handler.xt(Handle.WalkPuffle, (client, puffleId, walking) => {
   if (!client.isEngine2 && !client.isEngine1) {
