@@ -411,7 +411,7 @@ handler.xt(Handle.AdoptPuffle, (client, puffleType, puffleName) => {
   }
 
   // Validate puffle type exists in catalog
-  if (!PUFFLES.has(puffleType)) {
+  if (PUFFLES.get(puffleType) === undefined) {
     return;
   }
 
@@ -454,7 +454,7 @@ handler.xt(Handle.AdoptPuffleOld, (client, puffleType, puffleName) => {
   }
 
   // Validate puffle type exists in catalog
-  if (!PUFFLES.has(puffleType)) {
+  if (PUFFLES.get(puffleType) === undefined) {
     return;
   }
 
