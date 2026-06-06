@@ -447,7 +447,7 @@ handler.xt(Handle.AdoptPuffleOld, (client, puffleType, puffleName) => {
   }
   client.penguin.removeCoins(cost)
   const puffle = client.penguin.addPuffle(puffleName, puffleType);
-  client.sendXt('n', client.penguin.coins, getPuffleString(puffle));
+  client.sendXt('pn', client.penguin.coins, puffle.id, puffle.name, puffle.type, 100, 100, 100);
 
   client.addPostcard(111, { details: puffleName });
   client.update();
