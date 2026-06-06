@@ -447,9 +447,10 @@ handler.xt(Handle.AdoptPuffleOld, (client, puffleType, puffleName) => {
   }
   client.penguin.removeCoins(cost)
   const puffle = client.penguin.addPuffle(puffleName, puffleType);
-  // Engine 1 response: coins first, then puffle data with DeathTime appended
+  // Engine 1 response: subaction 'n' (adoption completed), followed by the puffle string
   const puffleStr = [puffle.id, puffle.name, puffle.type, 100, 100, 100, 100, 100, 100, 0].join('|');
-  client.sendXt('p', client.penguin.coins, puffleStr);
+  client.sendXt('p', 'n', puffleStr);
+  client.sendEngine1Coins();
 
   client.addPostcard(111, { details: puffleName });
   client.update();
