@@ -192,6 +192,7 @@ export function getSetupXml(version: Version, ip: string, port: number) {
       <Furntiture>${getFileName(chat, 'furniture')}</Furntiture>
       <Igloo>${getFileName(chat, 'igloo_')}</Igloo>
       <Pets>${getFileName(chat, 'adopt0703')}</Pets>
+      <Adopt>${getFileName(chat, 'pets')}</Adopt>
       <Cards>cards</Cards>
    </Catalogues>
 

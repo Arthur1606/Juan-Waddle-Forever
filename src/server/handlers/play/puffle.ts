@@ -423,11 +423,11 @@ handler.xt(Handle.AdoptPuffle, (client, puffleType, puffleName) => {
   client.penguin.removeCoins(cost)
   const puffle = client.penguin.addPuffle(puffleName, puffleType);
   client.sendXt('pn', client.penguin.coins, getPuffleString(puffle));
+  client.sendPuffles();
 
   client.addPostcard(111, { details: puffleName });
   client.update();
   // TODO favorite item code in houdini?
-  // TODO 'pgu' is necessary?
 })
 
 handler.xt(Handle.AdoptPuffleOld, (client, puffleType, puffleName) => {
@@ -447,7 +447,9 @@ handler.xt(Handle.AdoptPuffleOld, (client, puffleType, puffleName) => {
   }
   client.penguin.removeCoins(cost)
   const puffle = client.penguin.addPuffle(puffleName, puffleType);
-  client.sendXt('n', getPuffleString(puffle));
+  // Engine 1 response: coins first, then puffle data with DeathTime appended
+  const puffleStr = [puffle.id, puffle.name, puffle.type, 100, 100, 100, 100, 100, 100, 0].join('|');
+  client.sendXt('p', client.penguin.coins, puffleStr);
 
   client.addPostcard(111, { details: puffleName });
   client.update();
